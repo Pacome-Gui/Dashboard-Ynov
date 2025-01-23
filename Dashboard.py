@@ -17,7 +17,7 @@ def load_data():
 try :
     st.sidebar.write(st.secrets['API_KEY'])
 except:
-    st.error('Pas de clé')
+    st.sidebar.error('Pas de clé')
     
 df = load_data()
 
