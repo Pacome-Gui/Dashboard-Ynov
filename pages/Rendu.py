@@ -26,10 +26,9 @@ if uploaded_file is not None:
             #data = df[(df.Profession == profession) & (df.Age >= range_min) & (df.Age <= range_max)].Age
             if st.form_submit_button(label='Valider'):
                 with col2:
-                    st.write(columnX)
-                    st.dataframe(edited_df[columnX, columnY].groupby(by=[columnY]))
-                    #plot = sns.histplot(edited_df[columnX, columnY].groupby(by=[columnY]))
-                    #st.pyplot(plot.figure)
+                    st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnY]))
+                    plot = sns.histplot(edited_df[[columnX, columnY]].groupby(by=[columnY]))
+                    st.pyplot(plot.figure)
     
     
     
