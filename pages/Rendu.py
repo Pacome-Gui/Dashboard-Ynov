@@ -61,7 +61,7 @@ if uploaded_file is not None:
     with st.form(key='distribution'):
         col1, col2 = st.columns(2)
         with col1:
-            st.title("Diagramme en Point")
+            st.title("Diagramme de distribution")
             
             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
             # SelectBox
@@ -72,7 +72,7 @@ if uploaded_file is not None:
             if st.form_submit_button(label='Valider'):
                 with col2:
                     #st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
-                    plot = sns.boxenplot(edited_df, x=columnX, y=columnY, color=couleur)
+                    plot = sns.boxenplot(edited_df, x=columnX, y=columnY, color="b")
                     st.pyplot(plot.figure)
     
     
