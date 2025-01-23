@@ -3,13 +3,18 @@ import pandas as pd
 import seaborn as sns
 
 path = 'https://raw.githubusercontent.com/Quera-fr/Python-Programming/refs/heads/main/data.csv'
-df = pd.read_csv(path)
 
 st.set_page_config(
     page_title="My Dashboard",
     page_icon="",
     layout="wide"
 )
+
+@st.cache_data
+def load_data():
+    return pd.read_csv(path)
+
+df = load_data()
 
 st.title('My Dashboard')
 st.subheader('Présentation de données')
