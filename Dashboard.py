@@ -14,6 +14,11 @@ st.set_page_config(
 def load_data():
     return pd.read_csv(path)
 
+try :
+    st.sidebar.write(st.secrets['API_KEY'])
+except:
+    st.error('Pas de clé')
+    
 df = load_data()
 
 st.title('My Dashboard')
