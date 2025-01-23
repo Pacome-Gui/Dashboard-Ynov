@@ -29,7 +29,7 @@ if uploaded_file is not None:
             if st.form_submit_button(label='Valider'):
                 with col2:
                     st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
-                    plot = sns.barplot(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
+                    plot = sns.barplot(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean(), x=columnX, y=columnY)
                     st.pyplot(plot.figure)
     
     
