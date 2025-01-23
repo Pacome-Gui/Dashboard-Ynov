@@ -23,7 +23,7 @@ if uploaded_file is not None:
             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
             columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
             
-            method = st.selectbox("Methode :", ["sum", "mean", "min", "max"])
+            method = st.selectbox("Methode :", ["sum", "mean", "count", "min", "max"])
             # Slider
             #range_min, range_max = st.slider('Sélectionnez une tranche d\'âge', df.Age.min(), df.Age.max(), (30, 80))
         
@@ -43,6 +43,7 @@ if uploaded_file is not None:
             # SelectBox
             columnX = st.selectbox("Sélectionner X  (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
             columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
+            couleur = st.selectbox("Sélectionner couluer", edited_df.columns)
             
             # Slider
             #range_min, range_max = st.slider('Sélectionnez une tranche d\'âge', df.Age.min(), df.Age.max(), (30, 80))
@@ -51,7 +52,7 @@ if uploaded_file is not None:
             if st.form_submit_button(label='Valider'):
                 with col2:
                     #st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
-                    plot = sns.relplot(edited_df, x=columnX, y=columnY)
+                    plot = sns.relplot(edited_df, x=columnX, y=columnY, hue=couleur)
                     st.pyplot(plot.figure)
     
     
