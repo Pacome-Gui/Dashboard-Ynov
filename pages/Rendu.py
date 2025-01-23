@@ -32,7 +32,8 @@ if uploaded_file is not None:
             if st.form_submit_button(label='Valider'):
                 with col2:
                     #st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
-                    plot = sns.barplot(edited_df.groupby(by=[columnX, couleur]).agg(method), x=columnX, y=columnY, hue=couleur)
+                    data = edited_df[[columnX, columnY, couleur]].groupby(by=[columnX, couleur]).agg(method) if couleur is not None else edited_df[[columnX, columnY]].groupby(by=[columnX]).agg(method)
+                    plot = sns.barplot(data, x=columnX, y=columnY, hue=couleur)
                     st.pyplot(plot.figure)
                     
     with st.form(key='point'):
