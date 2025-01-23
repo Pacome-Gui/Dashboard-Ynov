@@ -22,7 +22,6 @@ if uploaded_file is not None:
             
             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
             columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
-            
             couleur = st.selectbox("Sélectionner couleur", edited_df.columns, index=None)
             
             method = st.selectbox("Methode :", ["sum", "mean", "count", "min", "max"])
@@ -33,7 +32,7 @@ if uploaded_file is not None:
             if st.form_submit_button(label='Valider'):
                 with col2:
                     #st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
-                    plot = sns.barplot(edited_df[[columnX, columnY]].groupby(by=[columnX]).agg(method), x=columnX, y=columnY, hue=couleur)
+                    plot = sns.barplot(edited_df[[columnX, columnY, couleur]].groupby(by=[columnX]).agg(method), x=columnX, y=columnY, hue=couleur)
                     st.pyplot(plot.figure)
                     
     with st.form(key='point'):
