@@ -46,7 +46,7 @@ if uploaded_file is not None:
             columnX = st.selectbox("Sélectionner X  (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
             columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
             couleur = st.selectbox("Sélectionner couleur", edited_df.columns, index=None)
-            size = st.selectbox("Sélectionner couleur", edited_df.select_dtypes(include=numerics).columns, index=None)
+            size = st.selectbox("Sélectionner taille", edited_df.select_dtypes(include=numerics).columns, index=None)
             
             # Slider
             #range_min, range_max = st.slider('Sélectionnez une tranche d\'âge', df.Age.min(), df.Age.max(), (30, 80))
@@ -56,6 +56,27 @@ if uploaded_file is not None:
                 with col2:
                     #st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
                     plot = sns.relplot(edited_df, x=columnX, y=columnY, hue=couleur, size=size)
+                    st.pyplot(plot.figure)
+                    
+    with st.form(key='distribution'):
+        col1, col2 = st.columns(2)
+        with col1:
+            st.title("Diagramme en Point")
+            
+            numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+            # SelectBox
+            columnX = st.selectbox("Sélectionner X  (Valeur numerique)", edited_df.columns)
+            columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
+            couleur = st.selectbox("Sélectionner couleur", edited_df.columns, index=None)
+            
+            # Slider
+            #range_min, range_max = st.slider('Sélectionnez une tranche d\'âge', df.Age.min(), df.Age.max(), (30, 80))
+        
+            #data = df[(df.Profession == profession) & (df.Age >= range_min) & (df.Age <= range_max)].Age
+            if st.form_submit_button(label='Valider'):
+                with col2:
+                    #st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
+                    plot = sns.boxenplot(edited_df, x=columnX, y=columnY, color=couleur)
                     st.pyplot(plot.figure)
     
     
