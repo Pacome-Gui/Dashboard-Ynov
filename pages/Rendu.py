@@ -12,7 +12,7 @@ if uploaded_file is not None:
     selected_columns = st.multiselect("Sélectionner les colonnes a télécharger", df.columns)
     edited_df = st.data_editor(df[selected_columns])
     
-    with st.form(key='my_form'):
+    with st.form(key='bar'):
     
         col1, col2 = st.columns(2)
         with col1:
@@ -34,13 +34,14 @@ if uploaded_file is not None:
                     plot = sns.barplot(edited_df[[columnX, columnY]].groupby(by=[columnX]).agg(method), x=columnX, y=columnY)
                     st.pyplot(plot.figure)
                     
-                col1, col2 = st.columns(2)
+    with st.form(key='point'):
+        col1, col2 = st.columns(2)
         with col1:
             st.title("Diagramme en Point")
             
             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
             # SelectBox
-            columnX = st.selectbox("Sélectionner X", edited_df.select_dtypes(include=numerics).columns)
+            columnX = st.selectbox("Sélectionner X  (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
             columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
             
             # Slider
