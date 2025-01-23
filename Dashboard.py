@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
+import os
 
 path = 'https://raw.githubusercontent.com/Quera-fr/Python-Programming/refs/heads/main/data.csv'
 
@@ -18,6 +19,13 @@ try :
     st.sidebar.write(st.secrets['API_KEY'])
 except:
     st.sidebar.error('Pas de clé')
+    
+    # key sur Heroku (linux)
+try :
+    key = os.environ['API_KEY']
+    st.sidebar.write(key)
+except:
+    st.sidebar.error('Pas de clé Heroku')
     
 df = load_data()
 
