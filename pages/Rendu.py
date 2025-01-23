@@ -19,7 +19,9 @@ if uploaded_file is not None:
         with col1:
             # SelectBox
             columnX = st.selectbox("Sélectionner X", edited_df.columns)
-            columnY = st.selectbox("Sélectionner Y", edited_df.columns)
+            
+            numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+            columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
             # Slider
             #range_min, range_max = st.slider('Sélectionnez une tranche d\'âge', df.Age.min(), df.Age.max(), (30, 80))
         
