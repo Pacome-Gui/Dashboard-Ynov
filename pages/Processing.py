@@ -10,7 +10,7 @@ if uploaded_file is not None:
     df  = pd.read_csv(uploaded_file, delimiter=',')
     
     # Multichoice select
-    selected_columns = st.multiple_choice("Sélectionner les colonnes a télécharger", df.columns)
+    selected_columns = st.multiselect("Sélectionner les colonnes a télécharger", df.columns)
     edited_df = st.data_editor(df[selected_columns])
     
     #Download
