@@ -22,14 +22,16 @@ if uploaded_file is not None:
             
             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
             columnY = st.selectbox("Sélectionner Y (Valeur numerique)", edited_df.select_dtypes(include=numerics).columns)
+            
+            method = st.selectbox("Methode :", ["sum", "mean", "min", "max"])
             # Slider
             #range_min, range_max = st.slider('Sélectionnez une tranche d\'âge', df.Age.min(), df.Age.max(), (30, 80))
         
             #data = df[(df.Profession == profession) & (df.Age >= range_min) & (df.Age <= range_max)].Age
             if st.form_submit_button(label='Valider'):
                 with col2:
-                    st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
-                    plot = sns.barplot(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean(), x=columnX, y=columnY)
+                    #st.dataframe(edited_df[[columnX, columnY]].groupby(by=[columnX]).mean())
+                    plot = sns.barplot(edited_df[[columnX, columnY]].groupby(by=[columnX]).agg(method), x=columnX, y=columnY)
                     st.pyplot(plot.figure)
     
     
