@@ -18,16 +18,16 @@ if uploaded_file is not None:
         
         with col1:
             # SelectBox
-            columnX = st.selectbox("Sélectionner X", df.columns)
+            columnX = st.selectbox("Sélectionner X", edited_df.columns)
             
-            columnY = st.selectbox("Sélectionner Y", df.columns)
+            columnY = st.selectbox("Sélectionner Y", edited_df.columns)
             # Slider
             #range_min, range_max = st.slider('Sélectionnez une tranche d\'âge', df.Age.min(), df.Age.max(), (30, 80))
         
             #data = df[(df.Profession == profession) & (df.Age >= range_min) & (df.Age <= range_max)].Age
             if st.form_submit_button(label='Valider'):
                 with col2:
-                    plot = sns.histplot(edited_df[columnX], edited_df[columnY])
+                    plot = sns.histplot(edited_df[columnX, columnY])
                     st.pyplot(plot.figure)
     
     
