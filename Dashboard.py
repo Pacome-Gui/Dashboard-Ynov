@@ -15,12 +15,13 @@ st.set_page_config(
 def load_data():
     return pd.read_csv(path)
 
+# Cle streamlit
 try :
     st.sidebar.write(st.secrets['API_KEY'])
 except:
     st.sidebar.error('Pas de clé')
     
-    # key sur Heroku (linux)
+# key sur Heroku (linux)
 try :
     key = os.environ['API_KEY']
     st.sidebar.write(key)
